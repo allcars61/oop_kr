@@ -1,0 +1,5 @@
+vk_api==11.9.1
+json==3.8.1
+datetime==4.3
+yadisk==0.14.2
+tqdm==4.48.2
