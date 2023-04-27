@@ -80,24 +80,5 @@ if __name__ == "__main__":
     vk_user_id = input("Введите ID пользователя ВКонтакте: ")
     yandex_disk_token = input("Введите токен Яндекс.Диска: ")
     photos_info, user_name = get_photos_info(vk_user_id)
-    headers = {"Authorization": "OAuth " + yandex_disk_token}
-    folder_name = user_name + "_photos_from_vk"
-
-    try:
-        requests.put(
-            "https://cloud-api.yandex.net/v1/disk/resources",
-            headers=headers,
-            params={"path": folder_name},
-            timeout=10,
-        )
-    except:
-        print("Ошибка при создании папки на Яндекс.Диске")
-        sys.exit()
-
-    upload_url = requests.get(
-        "https://cloud-api.yandex.net/v1/disk/resources/upload",
-        headers=headers,
-        params={"path": folder_name},
-        timeout=10,
-    ).json()["href"]
+   
     save_photos_to_disk(photos_info, user_name, yandex_disk_token)
