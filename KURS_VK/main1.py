@@ -40,7 +40,7 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
     folder_name = user_name + "_photos_from_vk"
     upload_url = "https://cloud-api.yandex.net/v1/disk/resources/upload"
     try:
-        requests.post(
+        requests.put(
             "https://cloud-api.yandex.net/v1/disk/resources",
             headers=headers,
             params={"path": folder_name},
@@ -51,15 +51,13 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
         sys.exit()
     photos_data = []
     for likes in photos_info:
-        photos_info[likes]["url"]
-
+        url = photos_info[likes]["url"]
         file_name = likes + ".jpg"
         params = {
-            "url": upload_url,
+            "url": url,
             "path": folder_name + "/" + file_name,
         }
-
-        requests.put(upload_url, headers=headers, params=params, files=files)
+        requests.post(upload_url, headers=headers, params=params, files=files)
         photos_data.append({"file_name": file_name, "likes": likes})
 
         with open("photos_info.json", "w", encoding="utf-8") as file:
