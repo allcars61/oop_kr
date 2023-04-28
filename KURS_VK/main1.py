@@ -3,6 +3,7 @@ import vk_api
 import json
 from datetime import datetime
 import requests
+from tqdm import tqdm
 
 
 def get_photos_info(vk_user_id):
@@ -50,7 +51,7 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
         print("Ошибка при создании папки на Яндекс.Диске")
         sys.exit()
     photos_data = []
-    for likes in photos_info:
+    for likes in tqdm(photos_info):
         url = photos_info[likes]["url"]
         file_name = likes + ".jpg"
         params = {
@@ -63,7 +64,7 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
         with open("photos_info.json", "w", encoding="utf-8") as file:
             json.dump(photos_data, file, ensure_ascii=False, indent=4)
 
-        print("Готово!")
+    print("Готово!")
 
 
 if __name__ == "__main__":
