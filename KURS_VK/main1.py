@@ -51,13 +51,9 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
         sys.exit()
     photos_data = []
     for likes in photos_info:
-        url = photos_info[likes]["url"]
         file_name = likes + ".jpg"
-        response = requests.get(url)
-        files = {"file": (file_name, response.content)}
         params = {
             "url": upload_url,
-            "method": "PUT",
             "path": folder_name + "/" + file_name,
         }
 
