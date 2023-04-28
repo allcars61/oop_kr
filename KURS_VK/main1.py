@@ -57,7 +57,7 @@ def save_photos_to_disk(photos_info, user_name, yandex_disk_token):
             "url": url,
             "path": folder_name + "/" + file_name,
         }
-        requests.post(upload_url, headers=headers, params=params, files=files)
+        requests.post(upload_url, headers=headers, params=params)
         photos_data.append({"file_name": file_name, "likes": likes})
 
         with open("photos_info.json", "w", encoding="utf-8") as file:
